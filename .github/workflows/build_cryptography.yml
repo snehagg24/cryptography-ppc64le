@@ -1,0 +1,36 @@
+name: Build Cryptography on Power
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: uraimo/run-on-arch-action@v2
+        name: Run commands
+        id: runcmd
+        with:
+          arch: ppc64le
+          distro: ubuntu20.04
+
+      - name: Install dependencies
+        run: |
+          arch
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' --force-yes -fuy git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
+          pip3 install --upgrade pip; 
+          pip3 install setuptools-rust; 
+          pip3 install wheel; 
+          pip3 install check-wheel-contents;
+
+      - name: Build cryptography
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
