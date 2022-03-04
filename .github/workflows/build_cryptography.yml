@@ -24,7 +24,7 @@ jobs:
         run: |
           arch
           sudo apt-get update -y
-          DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' --force-yes -fuy git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
+          sudo apt-get install -y git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
           pip3 install --upgrade pip; 
           pip3 install setuptools-rust; 
           pip3 install wheel; 
