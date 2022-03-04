@@ -8,32 +8,29 @@ on:
 
 jobs:
   build:
+    strategy: 
+      matrix:
+        architecture: [ppc64le]
+        platform: [linux]
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
       
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      
       - name: Install dependencies
-        uses: uraimo/run-on-arch-action@v2.1.1      
-        with:
-          arch: ppc64le
-          distro: ubuntu20.04
-
-          run: |
-            arch
-            apt-get update
-            DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' --force-yes -fuy git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
-            pip3 install --upgrade pip; 
-            pip3 install setuptools-rust; 
-            pip3 install wheel; 
-            pip3 install check-wheel-contents;
+        run: |
+          arch
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -o Dpkg::Options::='--force-confold' --force-yes -fuy git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
+          pip3 install --upgrade pip; 
+          pip3 install setuptools-rust; 
+          pip3 install wheel; 
+          pip3 install check-wheel-contents;
 
       - name: Build cryptography
-        uses: uraimo/run-on-arch-action@v2.1.1      
-        with:
-          arch: ppc64le
-          distro: ubuntu20.04
-          
-          run: |
-            chmod +x ./build.sh
-            ./build.sh
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
