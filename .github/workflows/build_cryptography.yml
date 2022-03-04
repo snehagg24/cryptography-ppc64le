@@ -17,20 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+      - uses: uraimo/run-on-arch-action@v2
+        name: Install dependencies and build cryptography
+        with:
+          arch: ppc64le
+          distro: ubuntu20.04
       
-      - name: Install dependencies
-        run: |
-          arch
-          sudo apt-get update -y
-          sudo apt-get install -y git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
-          pip3 install --upgrade pip; 
-          pip3 install setuptools-rust; 
-          pip3 install wheel; 
-          pip3 install check-wheel-contents;
+          run: |
+            arch
+            apt-get update -y
+            apt-get install -y git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
+            pip3 install --upgrade pip; 
+            pip3 install setuptools-rust; 
+            pip3 install wheel; 
+            pip3 install check-wheel-contents;
 
-      - name: Build cryptography
-        run: |
-          chmod +x ./build.sh
-          ./build.sh
+            #Building cryptography
+            chmod +x ./build.sh
+            ./build.sh
