@@ -41,7 +41,7 @@ jobs:
             ./build.sh
             
             #Copy built wheel file to artifacts directory
-            cp ./cryptography/dist/ /artifacts/
+            cp -r ./cryptography/dist/ /artifacts/
             
       - uses: actions/upload-artifact@v3
         with:
