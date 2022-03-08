@@ -18,6 +18,14 @@ jobs:
         with:
           arch: ppc64le
           distro: ubuntu20.04
+          
+          # Create an artifacts directory
+          setup: |
+            mkdir -p "${PWD}/artifacts"
+          
+          # Mount the artifacts directory as /artifacts in the container
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
       
           run: |
             arch
@@ -31,3 +39,11 @@ jobs:
             #Building cryptography
             chmod +x ./build.sh
             ./build.sh
+            
+            #Copy built wheel file to artifacts directory
+            cp ./cryptography/dist/ /artifacts/
+            
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cryptography-ppc-whl
+          path: ./artifacts/
