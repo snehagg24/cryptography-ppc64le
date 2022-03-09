@@ -2,7 +2,8 @@
 
 git clone https://github.com/pyca/cryptography.git
 cd ./cryptography/
-git checkout tags/$(git describe --tags --abbrev=0)
+export VERSION=$(git describe --tags --abbrev=0)
+git checkout tags/$VERSION
 
 python3 -m venv cryptography-venv
 pip3 install --upgrade pip
