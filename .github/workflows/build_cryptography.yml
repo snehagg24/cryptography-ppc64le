@@ -43,7 +43,7 @@ jobs:
             echo '::set-output name=RELEASE::$VERSION'
             
             #Copy built wheel file to artifacts directory
-            cp -r ./cryptography/dist/ /artifacts/
+            cp ./cryptography/dist/* /artifacts/
             
       - name: Create Release
         id: create_release
@@ -63,6 +63,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./artifacts/dist/
+          asset_path: ./artifacts/
           asset_name: cryptography-ppc64le-whl.zip
           asset_content_type: application/zip
