@@ -38,7 +38,6 @@ jobs:
 
             #Building cryptography
             chmod +x ./build.sh
-            ./build.sh
             source ./build.sh
             echo '::set-output name=RELEASE::v'$VERSION-$GITHUB_RUN_ID
             
