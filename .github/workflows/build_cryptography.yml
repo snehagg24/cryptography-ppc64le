@@ -42,7 +42,7 @@ jobs:
             echo '::set-output name=RELEASE::v'$VERSION-$GITHUB_RUN_ID
             
             #Copy built wheel file to artifacts directory
-            cp ./cryptography/dist/* /artifacts/
+            cp ./dist/* /artifacts/
             
       - name: Create Release
         id: create_release
