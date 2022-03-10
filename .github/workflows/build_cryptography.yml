@@ -29,7 +29,6 @@ jobs:
             --volume "${PWD}/artifacts:/artifacts"
       
           run: |
-            arch
             apt-get update -y
             apt-get install -y git python3 build-essential openssl libssl-dev enchant python3-venv python3-pip rustc 
             pip3 install --upgrade pip; 
@@ -40,6 +39,7 @@ jobs:
             #Building cryptography
             chmod +x ./build.sh
             ./build.sh
+            source ./build.sh
             echo '::set-output name=RELEASE::v'$VERSION-$GITHUB_RUN_ID
             
             #Copy built wheel file to artifacts directory
