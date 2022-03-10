@@ -63,4 +63,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./artifacts/*
+          asset_name: cryptography-linux-ppc64le.whl
           asset_content_type: application/octet-stream
