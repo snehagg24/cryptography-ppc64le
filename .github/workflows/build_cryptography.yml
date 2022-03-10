@@ -40,7 +40,7 @@ jobs:
             #Building cryptography
             chmod +x ./build.sh
             ./build.sh
-            echo '::set-output name=RELEASE::$VERSION'
+            echo '::set-output name=RELEASE::v'$VERSION-$GITHUB_RUN_ID
             
             #Copy built wheel file to artifacts directory
             cp ./cryptography/dist/* /artifacts/
@@ -51,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ steps.build.outputs.RELEASE }}
           release_name: ${{ steps.build.outputs.RELEASE }}
           draft: false
           prerelease: false 
