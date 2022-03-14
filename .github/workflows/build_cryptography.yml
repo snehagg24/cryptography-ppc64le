@@ -43,7 +43,7 @@ jobs:
             
             #Copy built wheel file to artifacts directory
             export WHEEL=$(basename ./dist/*)
-            echo '::set-output name=WHEEL_FILE::$WHEEL
+            echo '::set-output name=WHEEL_FILE::'$WHEEL
             cp ./dist/$WHEEL /artifacts/$WHEEL
             
       - name: Create Release
