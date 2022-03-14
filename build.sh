@@ -2,7 +2,7 @@
 
 git clone https://github.com/pyca/cryptography.git
 cd ./cryptography/
-export VERSION=$(git describe --tags --abbrev=0)
+export VERSION=$1
 git checkout tags/$VERSION
 
 python3 -m venv cryptography-venv
